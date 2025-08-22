@@ -3,7 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Le Seventeen - Casual Food</title>
+    <title>Le Seventeen - Restaurant Casual Food à Dijon | Menu & Horaires</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Restaurant Le Seventeen à Dijon. Découvrez nos délicieux plats : burgers, pâtes, salades, assiettes. Ouvert 7j/7 de 19h à 1h. Certification HALAL. 03.80.23.91.58">
+    <meta name="keywords" content="restaurant dijon, le seventeen, casual food, burgers, pâtes, salades, halal, 21000">
+    <meta name="author" content="Le Seventeen">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://le-seventeen.netlify.app/">
+    <meta property="og:title" content="Le Seventeen - Restaurant Casual Food à Dijon">
+    <meta property="og:description" content="Restaurant Le Seventeen à Dijon. Découvrez nos délicieux plats : burgers, pâtes, salades, assiettes. Ouvert 7j/7 de 19h à 1h.">
+    <meta property="og:image" content="https://le-seventeen.netlify.app/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://le-seventeen.netlify.app/">
+    <meta property="twitter:title" content="Le Seventeen - Restaurant Casual Food à Dijon">
+    <meta property="twitter:description" content="Restaurant Le Seventeen à Dijon. Découvrez nos délicieux plats : burgers, pâtes, salades, assiettes. Ouvert 7j/7 de 19h à 1h.">
+    <meta property="twitter:image" content="https://le-seventeen.netlify.app/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    
+    <!-- SEO -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -161,6 +192,28 @@
             <div class="section-header">
                 <i class="fas fa-utensils"></i>
                 <h2>Notre Carte</h2>
+                <p>Découvrez nos délicieuses spécialités</p>
+            </div>
+            
+            <!-- Breadcrumbs -->
+            <nav class="breadcrumbs">
+                <a href="#hero">Accueil</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Notre Carte</span>
+            </nav>
+            
+            <!-- Search and Filters -->
+            <div class="menu-controls">
+                <div class="search-container">
+                    <input type="text" id="menu-search" placeholder="Rechercher un plat...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Tous</button>
+                    <button class="filter-btn" data-filter="viande">Viande</button>
+                    <button class="filter-btn" data-filter="vegetarien">Végétarien</button>
+                    <button class="filter-btn" data-filter="signature">Signatures</button>
+                </div>
             </div>
 
             <!-- Sauces Maison -->
@@ -669,7 +722,11 @@
         </div>
     </footer>
 
+    <!-- Particules animées -->
+    <div id="particles-js"></div>
+    
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <!-- Bouton retour en haut -->
     <button class="scroll-to-top" id="scroll-to-top">

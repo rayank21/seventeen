@@ -479,3 +479,244 @@ window.addEventListener('scroll', function() {
         }
     }
 });
+
+// Configuration des particules
+particlesJS('particles-js', {
+    particles: {
+        number: {
+            value: 80,
+            density: {
+                enable: true,
+                value_area: 800
+            }
+        },
+        color: {
+            value: '#ffd700'
+        },
+        shape: {
+            type: 'circle',
+            stroke: {
+                width: 0,
+                color: '#000000'
+            }
+        },
+        opacity: {
+            value: 0.3,
+            random: false,
+            anim: {
+                enable: false,
+                speed: 1,
+                opacity_min: 0.1,
+                sync: false
+            }
+        },
+        size: {
+            value: 3,
+            random: true,
+            anim: {
+                enable: false,
+                speed: 40,
+                size_min: 0.1,
+                sync: false
+            }
+        },
+        line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#ffd700',
+            opacity: 0.2,
+            width: 1
+        },
+        move: {
+            enable: true,
+            speed: 2,
+            direction: 'none',
+            random: false,
+            straight: false,
+            out_mode: 'out',
+            bounce: false,
+            attract: {
+                enable: false,
+                rotateX: 600,
+                rotateY: 1200
+            }
+        }
+    },
+    interactivity: {
+        detect_on: 'canvas',
+        events: {
+            onhover: {
+                enable: true,
+                mode: 'repulse'
+            },
+            onclick: {
+                enable: true,
+                mode: 'push'
+            },
+            resize: true
+        },
+        modes: {
+            grab: {
+                distance: 400,
+                line_linked: {
+                    opacity: 1
+                }
+            },
+            bubble: {
+                distance: 400,
+                size: 40,
+                duration: 2,
+                opacity: 8,
+                speed: 3
+            },
+            repulse: {
+                distance: 200,
+                duration: 0.4
+            },
+            push: {
+                particles_nb: 4
+            },
+            remove: {
+                particles_nb: 2
+            }
+        }
+    },
+    retina_detect: true
+});
+
+// Fonctionnalité de recherche
+const menuSearch = document.getElementById('menu-search');
+const menuItems = document.querySelectorAll('.menu-item, .plate, .viande, .starter');
+
+menuSearch.addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    
+    menuItems.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+            item.style.display = 'block';
+            item.style.animation = 'fadeInUp 0.5s ease-out';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+});
+
+// Fonctionnalité de filtres
+const filterButtons = document.querySelectorAll('.filter-btn');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        // Retirer la classe active de tous les boutons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Ajouter la classe active au bouton cliqué
+        this.classList.add('active');
+        
+        const filter = this.getAttribute('data-filter');
+        
+        // Appliquer le filtre
+        applyFilter(filter);
+    });
+});
+
+function applyFilter(filter) {
+    menuItems.forEach(item => {
+        let show = false;
+        
+        switch(filter) {
+            case 'all':
+                show = true;
+                break;
+            case 'viande':
+                show = item.classList.contains('menu-item') || 
+                       item.classList.contains('viande') ||
+                       item.textContent.toLowerCase().includes('poulet') ||
+                       item.textContent.toLowerCase().includes('steak') ||
+                       item.textContent.toLowerCase().includes('escalope');
+                break;
+            case 'vegetarien':
+                show = item.textContent.toLowerCase().includes('salade') ||
+                       item.textContent.toLowerCase().includes('pâtes') ||
+                       item.textContent.toLowerCase().includes('végétarien');
+                break;
+            case 'signature':
+                show = item.classList.contains('signature-item') ||
+                       item.textContent.toLowerCase().includes('signature') ||
+                       item.textContent.toLowerCase().includes('spécial');
+                break;
+        }
+        
+        if (show) {
+            item.style.display = 'block';
+            item.style.animation = 'fadeInUp 0.5s ease-out';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+// Amélioration des animations de scroll
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '-50px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeInUp 0.8s ease-out';
+            entry.target.style.opacity = '1';
+        }
+    });
+}, observerOptions);
+
+// Observer tous les éléments animables
+document.querySelectorAll('.menu-section, .menu-item, .plate, .viande, .starter, .jour, .avis-card').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+});
+
+// Amélioration des effets de hover
+document.querySelectorAll('.menu-item, .plate, .viande, .starter').forEach(item => {
+    item.addEventListener('mouseenter', function() {
+        this.style.transform = this.style.transform + ' scale(1.02)';
+    });
+    
+    item.addEventListener('mouseleave', function() {
+        this.style.transform = this.style.transform.replace(' scale(1.02)', '');
+    });
+});
+
+// Animation du breadcrumb
+document.querySelectorAll('.breadcrumbs a').forEach(link => {
+    link.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateX(5px)';
+    });
+    
+    link.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateX(0)';
+    });
+});
+
+// Amélioration de la performance
+window.addEventListener('load', function() {
+    // Lazy loading des animations
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 100);
+});
+
+// Optimisation mobile
+if (window.innerWidth <= 768) {
+    // Réduire le nombre de particules sur mobile
+    particlesJS('particles-js', {
+        particles: {
+            number: {
+                value: 40
+            },
+            move: {
+                speed: 1
+            }
+        }
+    });
+}
