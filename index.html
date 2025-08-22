@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Seventeen - Casual Food</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Bouton hamburger pour le menu latéral -->
+            <div class="nav-left">
+                <button class="hamburger-menu" id="hamburger-menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Logo centré -->
+            <div class="nav-center">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Le Seventeen</h1>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Espace vide pour équilibrer -->
+            <div class="nav-right">
+                <div class="status-indicator" id="status-indicator">
+                    <span class="status-text" id="status-text">FERMÉ</span>
+                    <div class="status-dot" id="status-dot"></div>
+                </div>
+                <div class="language-selector">
+                    <span>FR</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menu latéral -->
+    <div class="sidebar-menu" id="sidebar-menu">
+        <div class="sidebar-header">
+            <h3>Notre Carte</h3>
+            <button class="close-sidebar" id="close-sidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-content">
+            <ul class="sidebar-links">
+                <li><a href="#assiettes" class="sidebar-link">
+                    <i class="fas fa-drumstick-bite"></i>
+                    Nos Assiettes
+                </a></li>
+                <li><a href="#pates" class="sidebar-link">
+                    <i class="fas fa-utensils"></i>
+                    Nos Pâtes
+                </a></li>
+                <li><a href="#salades" class="sidebar-link">
+                    <i class="fas fa-leaf"></i>
+                    Nos Salades
+                </a></li>
+                <li><a href="#burgers" class="sidebar-link">
+                    <i class="fas fa-hamburger"></i>
+                    Nos Burgers
+                </a></li>
+                <li><a href="#burgers-signatures" class="sidebar-link">
+                    <i class="fas fa-crown"></i>
+                    Nos Burgers Signatures
+                </a></li>
+                <li><a href="#toasts" class="sidebar-link">
+                    <i class="fas fa-bread-slice"></i>
+                    Nos Toasts
+                </a></li>
+                <li><a href="#pepite" class="sidebar-link">
+                    <i class="fas fa-gem"></i>
+                    Notre Pépite
+                </a></li>
+                <li><a href="#starters" class="sidebar-link">
+                    <i class="fas fa-egg"></i>
+                    Nos Starters
+                </a></li>
+                <li><a href="#avis" class="sidebar-link">
+                    <i class="fas fa-star"></i>
+                    Avis Clients
+                </a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Overlay pour fermer le menu -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Bienvenue au Seventeen</h2>
+                <p>Des plats savoureux faits maison</p>
+                <div class="halal-badge">
+                    <i class="fas fa-star"></i>
+                    HALAL
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horaires Section -->
+    <section class="horaires" id="horaires">
+        <div class="container">
+            <div class="section-header">
+                <i class="fas fa-clock"></i>
+                <h2>Nos Horaires</h2>
+                <p>Vous pouvez nous retrouver</p>
+            </div>
+            <div class="horaires-grid">
+                <div class="jour">
+                    <span class="jour-nom">Lundi</span>
+                    <span class="horaires-heures">19h00 - 1h00</span>
+                </div>
+                <div class="jour">
+                    <span class="jour-nom">Mardi</span>
+                    <span class="horaires-heures">19h00 - 1h00</span>
+                </div>
+                <div class="jour">
+                    <span class="jour-nom">Mercredi</span>
+                    <span class="horaires-heures">19h00 - 1h00</span>
+                </div>
+                <div class="jour">
+                    <span class="jour-nom">Jeudi</span>
+                    <span class="horaires-heures">19h00 - 1h00</span>
+                </div>
+                <div class="jour">
+                    <span class="jour-nom">Vendredi</span>
+                    <span class="horaires-heures">19h00 - 1h00</span>
+                </div>
+                <div class="jour">
+                    <span class="jour-nom">Samedi</span>
+                    <span class="horaires-heures">19h00 - 1h00</span>
+                </div>
+                <div class="jour">
+                    <span class="jour-nom">Dimanche</span>
+                    <span class="horaires-heures">19h00 - 1h00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <i class="fas fa-utensils"></i>
+                <h2>Notre Carte</h2>
+            </div>
+
+            <!-- Sauces Maison -->
+            <div class="menu-section" id="sauces">
+                <h3><i class="fas fa-pepper-hot"></i> Sauces Maison</h3>
+                <div class="sauces-grid">
+                    <div class="sauce">
+                        <div class="sauce-color vert"></div>
+                        <span>Vert</span>
+                    </div>
+                    <div class="sauce">
+                        <div class="sauce-color orange"></div>
+                        <span>Sweet</span>
+                    </div>
+                    <div class="sauce">
+                        <div class="sauce-color rouge"></div>
+                        <span>Spicy</span>
+                    </div>
+                </div>
+                <p class="supplement">SUPPLEMENT +0.80€</p>
+            </div>
+
+            <!-- Assiettes Composées -->
+            <div class="menu-section" id="assiettes">
+                <h3><i class="fas fa-drumstick-bite"></i> Nos Assiettes à Composées</h3>
+                <p class="section-subtitle">Toutes nos viandes sont fraîches & marinées maison</p>
+                
+                <div class="viandes-grid">
+                    <div class="viande">
+                        <i class="fas fa-cut"></i>
+                        <span>Escalope Gratinée Boursin</span>
+                    </div>
+                    <div class="viande supplement">
+                        <i class="fas fa-hamburger"></i>
+                        <span>Kefta Fourrée (+1€)</span>
+                    </div>
+                    <div class="viande">
+                        <i class="fas fa-bread-slice"></i>
+                        <span>Escalope Parisienne</span>
+                    </div>
+                    <div class="viande supplement">
+                        <i class="fas fa-drumstick-bite"></i>
+                        <span>Poulet Croustillant (+1€)</span>
+                    </div>
+                    <div class="viande">
+                        <i class="fas fa-egg"></i>
+                        <span>Steak Frais à Cheval</span>
+                    </div>
+                    <div class="viande supplement">
+                        <i class="fas fa-cheese"></i>
+                        <span>Cordon Bleu Fait Maison (+1€)</span>
+                    </div>
+                </div>
+
+                <div class="plates-grid">
+                    <div class="plate">
+                        <div class="plate-content">
+                            <h4>12.90€</h4>
+                            <p>Frites Maison ou Riz + Viande au Choix</p>
+                        </div>
+                    </div>
+                    <div class="plate">
+                        <div class="plate-content">
+                            <h4>13.90€</h4>
+                            <p>Frites Cheddar + Viande au Choix</p>
+                        </div>
+                    </div>
+                    <div class="plate">
+                        <div class="plate-content">
+                            <h4>14.90€</h4>
+                            <p>Frites Cheddar Bacon + Viande au Choix</p>
+                        </div>
+                    </div>
+                    <div class="plate">
+                        <div class="plate-content">
+                            <h4>14.90€</h4>
+                            <p>Pâtes Classique + Viande au Choix</p>
+                        </div>
+                    </div>
+                    <div class="plate special">
+                        <div class="plate-content">
+                            <h4>15.90€</h4>
+                            <p>Frites Cheddar Bacon ou Pâtes + Viande au Choix</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pâtes -->
+            <div class="menu-section" id="pates">
+                <h3><i class="fas fa-utensils"></i> Nos Pâtes</h3>
+                <p class="section-subtitle">Mijotées par nos soins</p>
+                
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Pâtes Poulet à la Forestière</h4>
+                            <p class="description">Pâtes avec poulet et sauce forestière</p>
+                        </div>
+                        <span class="price">7.90€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Pâtes Carbonara</h4>
+                            <p class="description">Pâtes à la carbonara traditionnelle</p>
+                        </div>
+                        <span class="price">7.90€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Pâtes Bolognaise</h4>
+                            <p class="description">Pâtes à la sauce bolognaise</p>
+                        </div>
+                        <span class="price">7.90€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Pâtes au Saumon</h4>
+                            <p class="description">Pâtes avec saumon frais</p>
+                        </div>
+                        <span class="price">9.40€</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Salades -->
+            <div class="menu-section" id="salades">
+                <h3><i class="fas fa-leaf"></i> Nos Salades</h3>
+                
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Salade Burrata</h4>
+                            <p class="description">Salade verte, burrata, tomates cerises, pesto, croûtons de pain, crème de balsamique</p>
+                        </div>
+                        <span class="price">7.90€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Salade Chicken</h4>
+                            <p class="description">Salade verte, tenders, tomates cerises, oignons rouges, croûtons de pain, sauce verte maison</p>
+                        </div>
+                        <span class="price">7.90€</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Burgers -->
+            <div class="menu-section" id="burgers">
+                <h3><i class="fas fa-hamburger"></i> Nos Burgers</h3>
+                <p class="section-subtitle">Menu Frites Maison Boisson +3€</p>
+                
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Le Classique</h4>
+                            <p class="description">Steak frais maison, cheddar, salade, oignons rouges, sauce Biggy</p>
+                        </div>
+                        <span class="price">7.90€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Le Smash Suprême</h4>
+                            <p class="description">Steak frais maison, bacon, cheddar, BBQ, salade, tomate, oignons frits</p>
+                        </div>
+                        <span class="price">8.90€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Le Chicken Green</h4>
+                            <p class="description">Tenders, emmental, sauce verte maison, salade, tomate, oignons rouges</p>
+                        </div>
+                        <span class="price">7.90€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Le Chicken Suprême</h4>
+                            <p class="description">Tenders, bacon, cheddar, sauce spicy maison, salade, tomate, oignons frits</p>
+                        </div>
+                        <span class="price">8.90€</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Burgers Signatures -->
+            <div class="menu-section signature" id="burgers-signatures">
+                <h3><i class="fas fa-crown"></i> Nos Burgers Signatures</h3>
+                <p class="section-subtitle">"Le Seventeen" - Viande fraîche et sauce cheddar maison accompagnée de frites maison et une boisson</p>
+                
+                <div class="menu-items">
+                    <div class="menu-item signature-item">
+                        <div class="item-info">
+                            <h4>Smash'n'Cheese Beef</h4>
+                            <p class="description">2 steak frais maison, 2 tranches de cheddar, oignons frits, sauce spicy maison</p>
+                        </div>
+                        <span class="price">14.90€</span>
+                    </div>
+                    <div class="menu-item signature-item">
+                        <div class="item-info">
+                            <h4>Chicken'n'Cheese</h4>
+                            <p class="description">Escalope de poulet pané maison, emmental, oignons frits, sauce spicy maison</p>
+                        </div>
+                        <span class="price">14.90€</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toasts -->
+            <div class="menu-section" id="toasts">
+                <h3><i class="fas fa-bread-slice"></i> Nos Toast</h3>
+                <p class="section-subtitle">Menu Frites Maison Boisson +3€</p>
+                
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Le Toast Smash</h4>
+                            <p class="description">Steak maison, cheddar, oignons rouges, sauce Biggy</p>
+                        </div>
+                        <span class="price">5.50€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Toast Bacon</h4>
+                            <p class="description">Steak maison, bacon, cheddar, BBQ, oignons frits</p>
+                        </div>
+                        <span class="price">6.50€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Toast Chicken Green</h4>
+                            <p class="description">Tenders, emmental, oignons rouges, sauce verte maison</p>
+                        </div>
+                        <span class="price">5.50€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Toast Chicken Suprême</h4>
+                            <p class="description">Tenders, bacon, cheddar, oignons frits, sauce spicy maison</p>
+                        </div>
+                        <span class="price">6.50€</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notre Pépite -->
+            <div class="menu-section" id="pepite">
+                <h3><i class="fas fa-gem"></i> Notre Pépite</h3>
+                
+                <div class="menu-items">
+                    <div class="menu-item special-item">
+                        <div class="item-info">
+                            <h4>Chicken Crousty</h4>
+                            <p class="description">Riz mijoté fait maison, oignons frits, morceaux de tenders, sauce sweet et sauce thai</p>
+                        </div>
+                        <span class="price">7.90€</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entrées -->
+            <div class="menu-section" id="starters">
+                <h3><i class="fas fa-egg"></i> Nos Starters</h3>
+                
+                <div class="starters-grid">
+                    <div class="starter">
+                        <span class="starter-name">Riz</span>
+                        <span class="starter-price">3.00€</span>
+                    </div>
+                    <div class="starter">
+                        <span class="starter-name">Tenders x3</span>
+                        <span class="starter-price">4.50€</span>
+                    </div>
+                    <div class="starter">
+                        <span class="starter-name">Wings x4</span>
+                        <span class="starter-price">4.50€</span>
+                    </div>
+                    <div class="starter">
+                        <span class="starter-name">Frites Cheddar</span>
+                        <span class="starter-price">3.50€</span>
+                    </div>
+                    <div class="starter">
+                        <span class="starter-name">Nuggets x5</span>
+                        <span class="starter-price">4.50€</span>
+                    </div>
+                    <div class="starter">
+                        <span class="starter-name">Frites Maison</span>
+                        <span class="starter-price">3.00€</span>
+                    </div>
+                    <div class="starter">
+                        <span class="starter-name">Bœuf Fromage x3</span>
+                        <span class="starter-price">4.90€</span>
+                    </div>
+                    <div class="starter">
+                        <span class="starter-name">Frites Cheddar Bacon</span>
+                        <span class="starter-price">4.50€</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Enfant -->
+            <div class="menu-section" id="menu-enfant">
+                <h3><i class="fas fa-baby"></i> Menu Enfant</h3>
+                
+                <div class="menu-items">
+                    <div class="menu-item kids-menu">
+                        <div class="item-info">
+                            <h4>Menu Enfant</h4>
+                            <p class="description">4 nuggets, 1 frite, compote & Caprisun</p>
+                        </div>
+                        <span class="price">6.00€</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boissons -->
+            <div class="menu-section" id="boissons">
+                <h3><i class="fas fa-glass-martini"></i> Nos Boissons</h3>
+                
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Bissap Maison</h4>
+                            <p class="description">Boisson hibiscus maison</p>
+                        </div>
+                        <span class="price">3.50€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Citronnade Maison</h4>
+                            <p class="description">Limonade maison</p>
+                        </div>
+                        <span class="price">3.50€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Canette 33cl</h4>
+                            <p class="description">Coca-Cola, Sprite, Fanta</p>
+                        </div>
+                        <span class="price">1.50€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Boisson 50cl</h4>
+                            <p class="description">Coca-Cola, Sprite, Fanta</p>
+                        </div>
+                        <span class="price">2.00€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Eau 50cl</h4>
+                            <p class="description">Eau minérale</p>
+                        </div>
+                        <span class="price">1.00€</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desserts -->
+            <div class="menu-section" id="desserts">
+                <h3><i class="fas fa-ice-cream"></i> Nos Desserts</h3>
+                
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Tiramisu Maison</h4>
+                            <p class="description">Tiramisu fait maison</p>
+                        </div>
+                        <span class="price">3.50€</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Salade de Fruits Frais</h4>
+                            <p class="description">Salade de fruits de saison</p>
+                        </div>
+                        <span class="price">3.50€</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Avis Clients -->
+    <section class="avis" id="avis">
+        <div class="container">
+            <div class="section-header">
+                <i class="fas fa-star"></i>
+                <h2>Avis de nos Clients</h2>
+                <p>Découvrez ce que disent nos clients sur Google</p>
+            </div>
+            
+            <div class="avis-grid">
+                <div class="avis-card">
+                    <div class="avis-header">
+                        <div class="avis-note">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="avis-date">Il y a 2 semaines</span>
+                    </div>
+                    <p class="avis-texte">"Excellent restaurant ! Les burgers sont délicieux et les frites maison sont parfaites. Service rapide et personnel très sympa. Je recommande vivement !"</p>
+                    <div class="avis-auteur">
+                        <span class="auteur-nom">Thomas M.</span>
+                        <span class="auteur-verifie">✓ Avis vérifié</span>
+                    </div>
+                </div>
+                
+                <div class="avis-card">
+                    <div class="avis-header">
+                        <div class="avis-note">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="avis-date">Il y a 1 mois</span>
+                    </div>
+                    <p class="avis-texte">"Ambiance sympa et cuisine de qualité. Les pâtes sont excellentes et les portions généreuses. Prix très corrects pour la qualité. À tester absolument !"</p>
+                    <div class="avis-auteur">
+                        <span class="auteur-nom">Marie L.</span>
+                        <span class="auteur-verifie">✓ Avis vérifié</span>
+                    </div>
+                </div>
+                
+                <div class="avis-card">
+                    <div class="avis-header">
+                        <div class="avis-note">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="avis-date">Il y a 1 semaine</span>
+                    </div>
+                    <p class="avis-texte">"Service exceptionnel et nourriture délicieuse ! Les burgers sont parfaits et les frites maison sont un régal. Ambiance très sympa, je recommande !"</p>
+                    <div class="avis-auteur">
+                        <span class="auteur-nom">Sophie R.</span>
+                        <span class="auteur-verifie">✓ Avis vérifié</span>
+                    </div>
+                </div>
+                
+                <div class="avis-card">
+                    <div class="avis-header">
+                        <div class="avis-note">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="avis-date">Il y a 2 jours</span>
+                    </div>
+                    <p class="avis-texte">"Incroyable ! Les pâtes sont cuites à la perfection et les sauces maison sont divines. Le personnel est adorable et l'ambiance est parfaite pour un dîner en famille."</p>
+                    <div class="avis-auteur">
+                        <span class="auteur-nom">Lucas M.</span>
+                        <span class="auteur-verifie">✓ Avis vérifié</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="avis-cta">
+                <a href="https://www.google.com/search?sca_esv=ce44fb6aa5ce43e4&sxsrf=AE3TifNj5GFTtg0Lc-pkQ91dqVRG21FePg:1755879205980&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E_AH7OYw8rHOkmSWhSlqQMoF7RbBdh89I5lBssCgd-MAEnfwx5a8DKboMGL6k15lFv9dpk4e4NIun40NwCwTbjWowBjp&q=Le+Seventeen+Avis&sa=X&ved=2ahUKEwiM99zi556PAxWKVaQEHU3vA0cQ0bkNegQINRAD&biw=1745&bih=835&dpr=1.1" target="_blank" class="avis-link">
+                    <i class="fab fa-google"></i>
+                    Voir tous nos avis Google
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Le Seventeen</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 17 RUE CHARLES DUMONT, 21000 DIJON</p>
+                    <p><i class="fas fa-phone"></i> 03.80.23.91.58</p>
+                    <p><i class="fas fa-clock"></i> DU LUNDI AU DIMANCHE 19H00/1H00</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/le_seventeen_/" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i> @le_seventeen_
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Certification</h4>
+                    <div class="halal-certification">
+                        <i class="fas fa-certificate"></i>
+                        <span>HALAL</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Le Seventeen - Des plats savoureux faits maison</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+    <!-- Bouton retour en haut -->
+    <button class="scroll-to-top" id="scroll-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+</body>
+</html>
