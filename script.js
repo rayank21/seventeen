@@ -395,6 +395,131 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'translateX(0)';
         });
     });
+
+    // ===== FONCTIONNALITÉ DE RECHERCHE SIMPLIFIÉE =====
+    
+    // Fonctionnalité de recherche intelligente
+    const menuSearch = document.getElementById('menu-search');
+
+    // Fonction pour normaliser le texte (enlever accents, espaces, etc.)
+    function normalizeText(text) {
+        return text.toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '') // Enlever les accents
+            .replace(/[^a-z0-9]/g, ''); // Garder seulement lettres et chiffres
+    }
+
+    // Fonction pour calculer la similarité entre deux textes
+    function calculateSimilarity(text1, text2) {
+        const normalized1 = normalizeText(text1);
+        const normalized2 = normalizeText(text2);
+        
+        // Si l'un contient l'autre, c'est une correspondance
+        if (normalized1.includes(normalized2) || normalized2.includes(normalized1)) {
+            return 1;
+        }
+        
+        // Calculer la distance de Levenshtein simplifiée
+        let distance = 0;
+        const maxLength = Math.max(normalized1.length, normalized2.length);
+        
+        for (let i = 0; i < Math.min(normalized1.length, normalized2.length); i++) {
+            if (normalized1[i] !== normalized2[i]) {
+                distance++;
+            }
+        }
+        distance += Math.abs(normalized1.length - normalized2.length);
+        
+        return 1 - (distance / maxLength);
+    }
+
+    // Event listener pour la recherche
+    if (menuSearch) {
+        menuSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            if (searchTerm.length === 0) {
+                // Si la recherche est vide, tout afficher normalement
+                document.querySelectorAll('.menu-section').forEach(section => {
+                    section.style.display = 'block';
+                });
+                document.querySelectorAll('.menu-item, .plate, .viande, .starter').forEach(item => {
+                    item.style.display = 'block';
+                    item.style.animation = 'fadeInUp 0.5s ease-out';
+                });
+                return;
+            }
+            
+            // Rechercher dans tous les éléments du menu
+            document.querySelectorAll('.menu-item, .plate, .viande, .starter').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const normalizedSearch = normalizeText(searchTerm);
+                const normalizedText = normalizeText(text);
+                
+                // Vérifier les correspondances exactes et similaires
+                let shouldShow = false;
+                
+                // Correspondance exacte
+                if (text.includes(searchTerm) || normalizedText.includes(normalizedSearch)) {
+                    shouldShow = true;
+                }
+                
+                // Correspondance avec fautes de frappe (similarité > 0.7)
+                if (!shouldShow) {
+                    const similarity = calculateSimilarity(searchTerm, text);
+                    if (similarity > 0.7) {
+                        shouldShow = true;
+                    }
+                }
+                
+                // Correspondances intelligentes
+                if (!shouldShow) {
+                    const searchWords = searchTerm.split(' ').filter(word => word.length > 2);
+                    const textWords = text.split(' ').filter(word => word.length > 2);
+                    
+                    for (let searchWord of searchWords) {
+                        for (let textWord of textWords) {
+                            const wordSimilarity = calculateSimilarity(searchWord, textWord);
+                            if (wordSimilarity > 0.8) {
+                                shouldShow = true;
+                                break;
+                            }
+                        }
+                        if (shouldShow) break;
+                    }
+                }
+                
+                if (shouldShow) {
+                    item.style.display = 'block';
+                    item.style.animation = 'fadeInUp 0.5s ease-out';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    // Amélioration des effets de hover
+    document.querySelectorAll('.menu-item, .plate, .viande, .starter').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = this.style.transform + ' scale(1.02)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = this.style.transform.replace(' scale(1.02)', '');
+        });
+    });
+
+    // Animation du breadcrumb
+    document.querySelectorAll('.breadcrumbs a').forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(5px)';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0)';
+        });
+    });
 });
 
 // Fonction pour afficher l'heure actuelle
@@ -582,288 +707,6 @@ particlesJS('particles-js', {
         }
     },
     retina_detect: true
-});
-
-// Fonctionnalité de recherche intelligente
-const menuSearch = document.getElementById('menu-search');
-const menuItems = document.querySelectorAll('.menu-item, .plate, .viande, .starter');
-
-// Fonction pour normaliser le texte (enlever accents, espaces, etc.)
-function normalizeText(text) {
-    return text.toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '') // Enlever les accents
-        .replace(/[^a-z0-9]/g, ''); // Garder seulement lettres et chiffres
-}
-
-// Fonction pour calculer la similarité entre deux textes
-function calculateSimilarity(text1, text2) {
-    const normalized1 = normalizeText(text1);
-    const normalized2 = normalizeText(text2);
-    
-    // Si l'un contient l'autre, c'est une correspondance
-    if (normalized1.includes(normalized2) || normalized2.includes(normalized1)) {
-        return 1;
-    }
-    
-    // Calculer la distance de Levenshtein simplifiée
-    let distance = 0;
-    const maxLength = Math.max(normalized1.length, normalized2.length);
-    
-    for (let i = 0; i < Math.min(normalized1.length, normalized2.length); i++) {
-        if (normalized1[i] !== normalized2[i]) {
-            distance++;
-        }
-    }
-    distance += Math.abs(normalized1.length - normalized2.length);
-    
-    return 1 - (distance / maxLength);
-}
-
-menuSearch.addEventListener('input', function() {
-    const searchTerm = this.value.toLowerCase();
-    
-    if (searchTerm.length === 0) {
-        // Si la recherche est vide, tout afficher
-        menuItems.forEach(item => {
-            item.style.display = 'block';
-            item.style.animation = 'fadeInUp 0.5s ease-out';
-        });
-        return;
-    }
-    
-    menuItems.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        const normalizedSearch = normalizeText(searchTerm);
-        const normalizedText = normalizeText(text);
-        
-        // Vérifier les correspondances exactes et similaires
-        let shouldShow = false;
-        
-        // Correspondance exacte
-        if (text.includes(searchTerm) || normalizedText.includes(normalizedSearch)) {
-            shouldShow = true;
-        }
-        
-        // Correspondance avec fautes de frappe (similarité > 0.7)
-        if (!shouldShow) {
-            const similarity = calculateSimilarity(searchTerm, text);
-            if (similarity > 0.7) {
-                shouldShow = true;
-            }
-        }
-        
-        // Correspondances intelligentes
-        if (!shouldShow) {
-            const searchWords = searchTerm.split(' ').filter(word => word.length > 2);
-            const textWords = text.split(' ').filter(word => word.length > 2);
-            
-            for (let searchWord of searchWords) {
-                for (let textWord of textWords) {
-                    const wordSimilarity = calculateSimilarity(searchWord, textWord);
-                    if (wordSimilarity > 0.8) {
-                        shouldShow = true;
-                        break;
-                    }
-                }
-                if (shouldShow) break;
-            }
-        }
-        
-        if (shouldShow) {
-            item.style.display = 'block';
-            item.style.animation = 'fadeInUp 0.5s ease-out';
-        } else {
-            item.style.display = 'none';
-        }
-    });
-    
-    // Mettre à jour le bouton "Tous" si la recherche est active
-    if (searchTerm.length > 0) {
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        document.querySelector('[data-filter="all"]').classList.add('active');
-    }
-});
-
-// Fonctionnalité de filtres intelligents
-const filterButtons = document.querySelectorAll('.filter-btn');
-
-filterButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        // Retirer la classe active de tous les boutons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        // Ajouter la classe active au bouton cliqué
-        this.classList.add('active');
-        
-        const filter = this.getAttribute('data-filter');
-        
-        // Vider la recherche si on change de filtre
-        if (filter !== 'all') {
-            menuSearch.value = '';
-        }
-        
-        // Appliquer le filtre
-        applyFilter(filter);
-    });
-});
-
-function applyFilter(filter) {
-    const searchTerm = menuSearch.value.toLowerCase();
-    
-    menuItems.forEach(item => {
-        let show = false;
-        const text = item.textContent.toLowerCase();
-        
-        // D'abord appliquer le filtre
-        switch(filter) {
-            case 'all':
-                show = true;
-                break;
-                
-            case 'viande':
-                // Plats avec viande
-                show = text.includes('poulet') || 
-                       text.includes('steak') || 
-                       text.includes('escalope') ||
-                       text.includes('kefta') ||
-                       text.includes('cordon bleu') ||
-                       text.includes('bacon') ||
-                       text.includes('tenders') ||
-                       text.includes('nuggets') ||
-                       text.includes('wings') ||
-                       text.includes('bœuf') ||
-                       text.includes('beef') ||
-                       text.includes('carbonara') ||
-                       text.includes('bolognaise') ||
-                       text.includes('saumon') ||
-                       item.classList.contains('viande');
-                break;
-                
-            case 'vegetarien':
-                // Plats sans viande
-                show = text.includes('salade') ||
-                       text.includes('burrata') ||
-                       text.includes('riz') ||
-                       text.includes('frites') ||
-                       text.includes('tiramisu') ||
-                       text.includes('fruits') ||
-                       text.includes('citronnade') ||
-                       text.includes('bissap') ||
-                       text.includes('eau') ||
-                       text.includes('canette') ||
-                       text.includes('boisson') ||
-                       text.includes('compote') ||
-                       text.includes('caprisun') ||
-                       (text.includes('pâtes') && !text.includes('poulet') && !text.includes('carbonara') && !text.includes('bolognaise') && !text.includes('saumon'));
-                break;
-                
-            case 'signature':
-                // Plats signatures et spéciaux
-                show = item.classList.contains('signature-item') ||
-                       item.classList.contains('special-item') ||
-                       text.includes('signature') ||
-                       text.includes('spécial') ||
-                       text.includes('suprême') ||
-                       text.includes('crousty') ||
-                       text.includes('pépite') ||
-                       text.includes('maison') ||
-                       text.includes('cheddar bacon') ||
-                       text.includes('boursin') ||
-                       text.includes('parisienne') ||
-                       text.includes('forestière');
-                break;
-        }
-        
-        // Ensuite appliquer la recherche si elle existe
-        if (show && searchTerm.length > 0) {
-            const normalizedSearch = normalizeText(searchTerm);
-            const normalizedText = normalizeText(text);
-            
-            let searchMatch = false;
-            
-            // Correspondance exacte
-            if (text.includes(searchTerm) || normalizedText.includes(normalizedSearch)) {
-                searchMatch = true;
-            }
-            
-            // Correspondance avec fautes de frappe
-            if (!searchMatch) {
-                const similarity = calculateSimilarity(searchTerm, text);
-                if (similarity > 0.7) {
-                    searchMatch = true;
-                }
-            }
-            
-            // Correspondances intelligentes
-            if (!searchMatch) {
-                const searchWords = searchTerm.split(' ').filter(word => word.length > 2);
-                const textWords = text.split(' ').filter(word => word.length > 2);
-                
-                for (let searchWord of searchWords) {
-                    for (let textWord of textWords) {
-                        const wordSimilarity = calculateSimilarity(searchWord, textWord);
-                        if (wordSimilarity > 0.8) {
-                            searchMatch = true;
-                            break;
-                        }
-                    }
-                    if (searchMatch) break;
-                }
-            }
-            
-            show = searchMatch;
-        }
-        
-        if (show) {
-            item.style.display = 'block';
-            item.style.animation = 'fadeInUp 0.5s ease-out';
-        } else {
-            item.style.display = 'none';
-        }
-    });
-}
-
-// Amélioration des animations de scroll
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '-50px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.8s ease-out';
-            entry.target.style.opacity = '1';
-        }
-    });
-}, observerOptions);
-
-// Observer tous les éléments animables
-document.querySelectorAll('.menu-section, .menu-item, .plate, .viande, .starter, .jour, .avis-card').forEach(el => {
-    el.style.opacity = '0';
-    observer.observe(el);
-});
-
-// Amélioration des effets de hover
-document.querySelectorAll('.menu-item, .plate, .viande, .starter').forEach(item => {
-    item.addEventListener('mouseenter', function() {
-        this.style.transform = this.style.transform + ' scale(1.02)';
-    });
-    
-    item.addEventListener('mouseleave', function() {
-        this.style.transform = this.style.transform.replace(' scale(1.02)', '');
-    });
-});
-
-// Animation du breadcrumb
-document.querySelectorAll('.breadcrumbs a').forEach(link => {
-    link.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateX(5px)';
-    });
-    
-    link.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateX(0)';
-    });
 });
 
 // Amélioration de la performance
